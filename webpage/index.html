@@ -72,11 +72,17 @@
 
 
         function translate(text, lang) {
-            const regex = /".+"/gu;
+            const regex = /".+"|\s(?:\p{L}|\p{N})+\s/gu;
             translated_text = text.replaceAll(regex, function(str) {
                 sliced_str = str.slice(1,-1);
                 if (sliced_str in action_names_dict) {
-                    return '"' + actions_list[action_names_dict[sliced_str]][lang] + '"';
+                    const translated_str = '"' + actions_list[action_names_dict[sliced_str]][lang] + '"';
+                    if (str[0] != '"') {
+                        return str[0] + translated_str + str[str.length-1];
+                    }
+                    else {
+                        return translated_str
+                    }
                 }
                 else {
                     return str;

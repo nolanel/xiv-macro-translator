@@ -68,9 +68,15 @@ class XIVApiWrapper:
         return "{}{}".format(XIVApiWrapper.BASE_URL, endpoint)
 
     def get_all_actions():
-        indexes=("Action",)
+        indexes=(
+            "Action",
+            "BuddyAction",
+            "CraftAction",
+            "EurekaMagiaAction",
+            "GeneralAction",
+            "PetAction",
+        )
         columns=(
-            "ID",
             "Name_de",
             "Name_en",
             "Name_fr",
