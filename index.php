@@ -1,4 +1,4 @@
 <?php
-    chroot("/webpage/");
+    chdir("webpage/");
     include_once("index.html");
 ?>
