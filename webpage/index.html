@@ -35,13 +35,13 @@
 
     <footer class="d-none d-md-block fixed-bottom text-center bg-secondary" id="footer">
         <div class="copyright text-primary" id="se-copyright">
-            FINAL FANTASY XIV ©2010 - 2020 SQUARE ENIX CO., LTD. FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd. All material used under license.
+            FINAL FANTASY XIV ©2010 - 2021 SQUARE ENIX CO., LTD. FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd. All material used under license.
         </div>
     </footer>
 
     <footer class="d-md-none static-bottom text-center bg-secondary" id="footer">
         <div class="copyright text-primary" id="se-copyright">
-            FINAL FANTASY XIV ©2010 - 2020 SQUARE ENIX CO., LTD. FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd. All material used under license.
+            FINAL FANTASY XIV ©2010 - 2021 SQUARE ENIX CO., LTD. FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd. All material used under license.
         </div>
     </footer>
 
@@ -72,22 +72,28 @@
 
 
         function translate(text, lang) {
-            const regex = /".+"|\s(?:\p{L}|\p{N})+\s/gu;
-            translated_text = text.replaceAll(regex, function(str) {
-                sliced_str = str.slice(1,-1);
-                if (sliced_str in action_names_dict) {
-                    const translated_str = '"' + actions_list[action_names_dict[sliced_str]][lang] + '"';
-                    if (str[0] != '"') {
-                        return str[0] + translated_str + str[str.length-1];
+            let translated_text = "";
+            if (text in action_names_dict) {
+                translated_text = actions_list[action_names_dict[text]][lang]
+            }
+            else {
+                const regex = /".+"|\s(?:\p{L}|\p{N})+\s/gu;
+                translated_text = text.replaceAll(regex, function(str) {
+                    sliced_str = str.slice(1,-1);
+                    if (sliced_str in action_names_dict) {
+                        const translated_str = '"' + actions_list[action_names_dict[sliced_str]][lang] + '"';
+                        if (str[0] != '"') {
+                            return str[0] + translated_str + str[str.length-1];
+                        }
+                        else {
+                            return translated_str
+                        }
                     }
                     else {
-                        return translated_str
+                        return str;
                     }
-                }
-                else {
-                    return str;
-                }
-            });
+                });
+            }
             $("#translated-macro").val(translated_text);
         }
 

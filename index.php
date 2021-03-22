@@ -1,1 +1,4 @@
-<?php include_once("index.html"); ?>
+<?php
+    chroot("webpage");
+    include_once("index.html");
+?>
