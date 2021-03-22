@@ -1,4 +1,4 @@
 <?php
-    chdir("webpage/");
+    define("BASE_PATH", "webpage/");
     include_once("index.html");
 ?>
